@@ -16,7 +16,7 @@ public class Item {
     @Column(length = 50, nullable = false)
     private String name;
 
-    @Column(length = 100)
+    @Column
     private String imgPath;
 
     @Column
