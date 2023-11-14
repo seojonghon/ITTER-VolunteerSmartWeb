@@ -1,8 +1,9 @@
+
 # <span id='top'> 🤝 ITEER Report💻</span>
 
 ## 1. 💻 프로젝트 개요
-메인사진
-![main_page](https://[github.com/seojonghon/ITTER-VolunteerSmartWeb/](https://github.com/seojonghon/ITTER-VolunteerSmartWeb-/blob/main/img/%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4.png)
+<img src="https://raw.githubusercontent.com/seojonghon/ITTER-VolunteerSmartWeb-/main/img/%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4.png" alt="main_page">
+
 ### 1-1. 프로젝트 명
 
 ### ITEER(It Volunteer Web)
@@ -13,6 +14,15 @@
 ### 1-3. 활용방안 및 기대효과
 
 ##### 웹의 사용자들이 선호하는 IT관련 분야(C, JAVA, Javascript, 아두이노, 스크래치 등)를 선택하여 가입하고 it 계열의 봉사활동  참여가 가능하게 했습니다.또한,  IT관련 교육 봉사활동을 완료하면 일정한 포인트를 지급하여 봉사활동 뱃지, 프로필 꾸미기,달력  등  봉사자들이 만든 수공예품을 구매할 수 있도록 하여 봉사활동의  참여도를 높일 수 있을 것이라고 생각합니다.
+
+### 1-4. 시스템 아키텍쳐 && WireFrame
+- 아키텍쳐
+<img src="https://raw.githubusercontent.com/seojonghon/ITTER-VolunteerSmartWeb-/main/img/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.png" alt="main_page">
+- 메인 화면 구상
+<img src="https://raw.githubusercontent.com/seojonghon/ITTER-VolunteerSmartWeb-/main/img/%EC%99%80%EC%9D%B4%EC%96%B4%20%ED%94%84%EB%A0%88%EC%9E%841.png" alt="main_page">
+- 세부 페이지
+<img src="https://raw.githubusercontent.com/seojonghon/ITTER-VolunteerSmartWeb-/main/img/%EC%99%80%EC%9D%B4%EC%96%B4%20%ED%94%84%EB%A0%88%EC%9E%842.png" alt="main_page">
+
 ## 2. 👥 팀 소개
 |                                                                                                                                   |                                               서종훈                                                |                                               이학현|                                                   이지은|                                                   최민준                                                   |
 | :---------------: | :-----------------------------------------------------------------: | :------------------------------------------------: | :------------------: | :--------         |
@@ -21,7 +31,7 @@
 
 - ####  이학현(BE) : 명세서 작성, 유저 게시판 및 활동 포인트  구현
 
-- #### 이지은(BE) : 1365 크롤링  , 유저 게시판 및 관리자 페이지  구현
+- #### 이지은(FE) : 1365 크롤링  , 유저 게시판 및 관리자 페이지  구현
 
 - #### 최민준(FE) : 기능별 화면 프론트단 구성 및 구현
 
@@ -44,7 +54,9 @@
 
 ### 📊 기술 스택
 
- ![Static Badge](https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=Spring%20Boot&logoColor=%23FFFFFF)  ![Static Badge](https://img.shields.io/badge/MySQL-4479A1?logo=MySQL&logoColor=%23FFFFFF)  ![Static Badge](https://img.shields.io/badge/Vue.js-4FC08D?logo=Vue.js&logoColor=%23FFFFFF)  ![Static Badge](https://img.shields.io/badge/Java-007396?logo=Java&logoColor=%23FFFFFF)
+ ![Static Badge](https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=Spring%20Boot&logoColor=%23FFFFFF)    ![Static Badge](https://img.shields.io/badge/Vue.js-4FC08D?logo=Vue.js&logoColor=%23FFFFFF)  ![Static Badge](https://img.shields.io/badge/Java-007396?logo=Java&logoColor=%23FFFFFF)
+ ![MariaDB Badge](https://img.shields.io/badge/MariaDB-003545?logo=MariaDB&logoColor=white)
+
  ![Static Badge](https://img.shields.io/badge/AWS-FF9900?logo=Amazon%20AWS&logoColor=%23FFFFFF) ![Static Badge](https://img.shields.io/badge/Bootstrap-7952B3?logo=Bootstrap&logoColor=%23FFFFFF)
 
 ### ⌨️ 개발 환경
@@ -337,7 +349,6 @@ git clone https://github.com/seojonghon/ITTER-VolunteerSmartWeb-.git
 		- 애플리케이션 로직이 동작하기 때문
 	- 따라서 웹 서버, WAS를 둘 다 두고 정적 리소스가 많이 사용되면 웹 서버를 증설하고, 애플리케이션 리소스가 많이 사용되면 WAS 증설
 
-```
 ## ⚙️8.향후 계획 및 확장성
 - UX (사용자 경험) 개선
 
