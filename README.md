@@ -2,7 +2,7 @@
 
 ## 1. 💻 프로젝트 개요
 메인사진
-
+![main_page](https://[github.com/seojonghon/ITTER-VolunteerSmartWeb/](https://github.com/seojonghon/ITTER-VolunteerSmartWeb-/blob/main/img/%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4.png)
 ### 1-1. 프로젝트 명
 
 ### ITEER(It Volunteer Web)
