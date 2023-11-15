@@ -203,8 +203,7 @@ Secure 옵션을 True로 설정해야 하며 이는 HTTPS 적용이 되어있지
   #### 6-4. JWT 토큰 검증 로직
 
 1.  클라이언트가 Endpoint로 HTTP 요청
-2.  Flask가 해당 엔드포인트를 처리할 함수를 호출하기 전에 @jwt_required 데코레이터가 요청을 가로챔
-3.  @jwt_required 데코레이터는 요청에서 JWT 토큰을 추출
+2.  @jwt_required 데코레이터는 요청에서 JWT 토큰을 추출
     -   토큰은 HTTP 요청 헤더의 Authorization 헤더에서 Bearer 스키마를 사용해 전달됨
 4.  추출된 JWT 토큰이 라이브러리에 의해 검증됨
     -   JWT 토큰의 서명이 올바른지 확인
