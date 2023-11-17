@@ -4,7 +4,8 @@
 
 ## 1. 💻 프로젝트 개요
 <img  src="https://raw.githubusercontent.com/seojonghon/ITTER-VolunteerSmartWeb-/main/img/%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4.png"  alt="main_page">
-### 1-1. 프로젝트 명
+
+### 1-1. 프로젝트 명![pioint상.PNG](https://github.com/seojonghon/ITTER-VolunteerSmartWeb/blob/main/img/pioint%EC%83%81.PNG?raw=true)
 
 ### ITEER(It Volunteer Web)
 > **IT 교육  봉사 스마트웹 🌸**
@@ -28,6 +29,15 @@
 - 세부 페이지
 
 <img src="https://raw.githubusercontent.com/seojonghon/ITTER-VolunteerSmartWeb-/main/img/%EC%99%80%EC%9D%B4%EC%96%B4%20%ED%94%84%EB%A0%88%EC%9E%842.png" alt="main_page">
+
+### 1-5. Front-end Back-end 코드 라인 수 집계
+![전체 코드라인 .png](https://github.com/seojonghon/ITTER-VolunteerSmartWeb/blob/main/img/%EC%A0%84%EC%B2%B4%20%EC%BD%94%EB%93%9C%EB%9D%BC%EC%9D%B8%20.png?raw=true)
+
+#### Front-end 
+![프론트 코드수.PNG](https://github.com/seojonghon/ITTER-VolunteerSmartWeb/blob/main/img/%ED%94%84%EB%A1%A0%ED%8A%B8%20%EC%BD%94%EB%93%9C%EC%88%98.PNG?raw=true)
+
+#### Back-end
+![back 코드수.PNG](https://github.com/seojonghon/ITTER-VolunteerSmartWeb/blob/main/img/back%20%EC%BD%94%EB%93%9C%EC%88%98.PNG?raw=true)
 ## 2. 👥 팀 소개
 |                                                                                                                                   |                                               서종훈                                                |                                               이학현|                                                   이지은|                                                   최민준                                                   |
 | :---------------: | :-----------------------------------------------------------------: | :------------------------------------------------: | :------------------: | :--------         |
@@ -229,9 +239,98 @@ Secure 옵션을 True로 설정해야 하며 이는 HTTPS 적용이 되어있지
 |8|posts | 게시판 정보 저장
 |9|point | 포인트 내역 저장
 
-### 7-2 Database Migration
-#### 기존의 로컬 개발 환경에서는 MySQL사용 -> 배포 환경 RDS로 Migration
+### 7-2. SpringBoot와 Maira DB연동 과정
+1. 의존성 추가: `pom.xml` 파일에 MariaDB JDBC 드라이버 의존성을 추가해야 함. 아래 코드를 `<dependencies>` 섹션에 추가
+```
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>버전</version>
+</dependency>
+```
+2. `application.properties` 파일을 설정
+```
+spring.datasource.url=jdbc:mariadb://localhost:8000/gallery
+spring.datasource.username=admin
+spring.datasource.password=password
+```
+3. 스프링 부트 설정: `@SpringBootApplication` 어노테이션이 있는 메인 클래스에 `@EnableJpaRepositories` 어노테이션을 추가
+```
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@SpringBootApplication
+@EnableJpaRepositories
+public class YourApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(YourApplication.class, args);
+    }
+}
+```
+4. 엔티티 및 리포지토리 생성: 데이터베이스와 연동하여 작업할 엔티티 클래스와 해당 엔티티를 조작하는 리포지토리 인터페이스를 생성
+#### Item엔티티(Item.java)
+```
+package org.africalib.gallery.backend.entity;
+
+import lombok.Getter;
+
+import javax.persistence.*;
+
+@Getter
+@Entity
+@Table(name = "items")
+public class Item {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(length = 50, nullable = false)
+    private String name;
+
+    @Column
+    private String imgPath;
+
+    @Column
+    private int price;
+
+    @Column
+    private int discountPer;
+
+    @Column
+    private String Content;
+}
+```
+#### Member 엔티티(Member.java)
+```
+package org.africalib.gallery.backend.entity;
+
+import lombok.Getter;
+
+import javax.persistence.*;
+
+@Getter
+@Entity
+@Table(name = "members")
+public class Member {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(length = 50, nullable = false, unique = true)
+    private String email;
+
+    @Column(length = 100, nullable = false)
+    private String password;
+
+}
+```
+### 7-3 Database Migration
+
+#### 기존의 로컬 개발 환경에서는 MySQL사용 -> 배포 환경 RDS로 Migration
+![RDS DB연결.PNG](https://github.com/seojonghon/ITTER-VolunteerSmartWeb/blob/main/img/RDS%20DB%EC%97%B0%EA%B2%B0.PNG?raw=true)
 #### 스프링부트 DB연결 설정 변경
 ```
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
@@ -337,8 +436,36 @@ JWT (JSON Web Token)를 생성하고 검증하는 서비스인 `JwtServiceImpl` 
 예를 들어, 주문 서비스에서 클라이언트(프론트 엔드)로부터 입력받은 주문 정보를 `OrderDto` 객체로 매핑하여 전달하거나, 주문 정보를 처리하는 과정에서 `OrderDto` 객체를 사용하여 데이터를 전달. 이를 통해 주문과 관련된 데이터를 효율적으로 전달하고 관리가능
 
 ## 10. Front-end와 Back-end 통신
+### 10-1. 통신 프로세스
+1.  클라이언트 요청:
+    
+    -   Front-end (클라이언트)는 사용자의 요청에 따라 Back-end에 데이터를 요청. 
+    -   요청은 HTTP 메서드(GET, POST, PUT, DELETE 등)와 요청 URL, 필요한 데이터 (파라미터, 헤더, 본문 등)로 구성
+2.  서버 라우팅:
+ 
+    -   Back-end 서버는 클라이언트의 요청을 받으면 해당 요청을 처리할 수 있는 적절한 핸들러 또는 컨트롤러로 라우팅
+    -   라우팅은 주로 URL 패턴 또는 엔드포인트와 핸들러 또는 컨트롤러의 매핑
+3.  요청 처리:
+    
+    -   Back-end의 핸들러 또는 컨트롤러는 클라이언트의 요청을 처리
+    -   이 단계에서는 필요한 비즈니스 로직을 수행하고, 데이터베이스, 외부 API 등의 리소스와 상호작용하여 데이터를 가져오거나 변경가능
+4.  데이터 응답:
+    
+    -   Back-end는 클라이언트에게 응답을 생성
+    -   응답은 주로 JSON, XML, HTML 등의 형식으로 클라이언트에 전달
+    -   응답에는 상태 코드, 헤더 정보, 본문 데이터 등이 포함
+5.  클라이언트 처리:
+    
+    -   Front-end는 Back-end로부터 받은 응답을 처리
+    -   이 단계에서는 받은 데이터를 파싱하고, 화면에 표시하거나 다른 로직에 활용
+    -   클라이언트는 필요한 경우 추가적인 요청을 생성하여 데이터를 요청하거나 다른 동작을 수행다.
+6.  추가 요청 및 응답:
+    
+    -   위의 단계를 반복하여 클라이언트와 서버 간의 추가적인 요청과 응답이 이루어짐
+    -   클라이언트는 사용자의 동작에 따라 계속적으로 Back-end와 통신하여 데이터를 업데이트가능
 
-### 10-1. HTTP 요청 - request
+#### -  Front-end와 Back-end 간의 통신은 클라이언트의 요청과 서버의 응답을 주고받으며, 데이터 처리와 상호작용을 통해 웹 애플리케이션의 동작을 구현. 통신은 주로 HTTP(S) 프로토콜을 사용하며, 데이터 형식은 주로 JSON을 활용
+### 10-2. HTTP 요청 - request
 - HTTP 요청과 관련된 정보를 처리하려면 'request' 객체를 사용
 - 이 객체는 현재 요청과 관련된 다양한 정보를 제공하며 HTTP 메서드, URL, 헤더, 쿼리 문자열, 폼 데이터, JSON 데이터 및 기타 요청 데이터에 접근할 수 있도록 도와줌
 - 'request' 객체를 사용해 얻을 수 있는 주요 정보
@@ -354,9 +481,9 @@ JWT (JSON Web Token)를 생성하고 검증하는 서비스인 `JwtServiceImpl` 
 	7.  **파일 업로드**: 파일 업로드가 있는 POST 요청의 경우, `request.files`를 사용하여 업로드된 파일에 접근할 수 있음
 	8.  **세션 정보**: `request.session`을 사용하여 현재 요청과 관련된 세션 데이터에 접근할 수 있음
 
-### 10-2 Back-end 서버측에서 API요청을 받아 CRUD매핑
+### 10-3 Back-end 서버측에서 API요청을 받아 CRUD매핑
 
-#### 10-2. 회원 가입 통신 로직 예시
+####  회원 가입 통신 로직 예시
 ```
 @RestController
 @RequestMapping("/api/members")
@@ -409,6 +536,10 @@ public class MemberController {
 
 - AWS EC2상에 SpringBoot와 Vue.js 배포
 - DB는 RDS로 마이그레이션 후 엔드 포인트 지정
+#### VueJs 배포
+![리액트 배포.PNG](https://github.com/seojonghon/ITTER-VolunteerSmartWeb/blob/main/img/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%B0%B0%ED%8F%AC.PNG?raw=true)
+#### SpringBoot 배포
+![EC2뱊포.PNG](https://github.com/seojonghon/ITTER-VolunteerSmartWeb/blob/main/img/EC2%EB%B1%8A%ED%8F%AC.PNG?raw=true)
 
 ### 초기 서버 환경 설정
 
@@ -443,7 +574,7 @@ git clone https://github.com/seojonghon/ITTER-VolunteerSmartWeb-.git
 		- 애플리케이션 로직이 동작하기 때문
 	- 따라서 웹 서버, WAS를 둘 다 두고 정적 리소스가 많이 사용되면 웹 서버를 증설하고, 애플리케이션 리소스가 많이 사용되면 WAS 증설
 
-## ⚙️12.향후 계획 및 확장성
+## ⚙️8.향후 계획 및 확장성
 - UX (사용자 경험) 개선
 - 봉사활동 후기 작성시 사진 첨부 기능 등 확장
 - 봉사, 주문 통계 데이터 분석 활용
